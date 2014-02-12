@@ -17,7 +17,7 @@ public class QuizServiceImpl implements QuizService {
 	
 	@Override
 	public Collection<Category> getCategories() {
-		return db.findAll(Category.class, "categories");
+		return db.findAll(Category.class, CATEGORIES_COLLECTION_NAME);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class QuizServiceImpl implements QuizService {
 		return db.findOne(Query.query(
 				Criteria.where("_id").is(gameId)),
 				Quiz.class,
-				"quizzes");
+				QUIZZES_COLLECTION_NAME);
 	}
 
 	@Override

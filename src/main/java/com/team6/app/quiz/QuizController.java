@@ -11,20 +11,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class QuizController {
+
+	private static final String QUIZ_PAGE_PATH = "quiz/quiz";
+	private static final String QUIZZES_PAGE_PATH = "quiz/quizzes";
 	
 	@Autowired
 	private QuizService quizService;
 	
 	@RequestMapping(value = "/quizzes", method = RequestMethod.GET)
 	public ModelAndView getCategories() {
-		ModelAndView mv = new ModelAndView("quiz/quizzes");
+		ModelAndView mv = new ModelAndView(QUIZZES_PAGE_PATH);
 		mv.addObject("categories", quizService.getCategories());
 		return mv;
 	}
 	
-	@RequestMapping(value = "/quizzes/{quizId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/quizzes/{questionCategory}", method = RequestMethod.GET)
+	public ModelAndView getCategory() {
+		ModelAndView mv = new ModelAndView(QUIZZES_PAGE_PATH);
+		mv.addObject("categories", quizService.getCategories());
+		return mv;
+	}
+	
+	@RequestMapping(value = "/quiz/{quizId}", method = RequestMethod.GET)
 	public ModelAndView getGame(@PathVariable String quizId) {
-		ModelAndView mv = new ModelAndView("quiz/quiz");
+		ModelAndView mv = new ModelAndView(QUIZ_PAGE_PATH);
 		mv.addObject("creator", quizService.getCreator(quizId));
 		mv.addObject("game", quizService.getQuiz(quizId));
 		return mv;
