@@ -1,0 +1,33 @@
+package com.team6.app.quiz;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class QuizController {
+	
+	@Autowired
+	private QuizService quizService;
+	
+	@RequestMapping(value = "/quizzes", method = RequestMethod.GET)
+	public ModelAndView getCategories() {
+		ModelAndView mv = new ModelAndView("quiz/quizzes");
+		mv.addObject("categories", quizService.getCategories());
+		return mv;
+	}
+	
+	@RequestMapping(value = "/quizzes/{quizId}", method = RequestMethod.GET)
+	public ModelAndView getGame(@PathVariable String quizId) {
+		ModelAndView mv = new ModelAndView("quiz/quiz");
+		mv.addObject("creator", quizService.getCreator(quizId));
+		mv.addObject("game", quizService.getQuiz(quizId));
+		return mv;
+	}
+	
+}
