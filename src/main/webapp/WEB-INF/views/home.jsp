@@ -30,8 +30,11 @@ if (result == 'Invalid Date')
 	Hello world!
 </h1>
 <p>Login <a href="login">HERE</a>.</p>
+<p>DO SOME QUIZZES <a href="quizzes">HERE</a>.</p>
 
 <P>  The time on the server is ${serverTime}. </P>
+<P> ${userexists}</P>
+<%request.setAttribute("userexists", ""); %>
 
 <form action="Signup" method="POST">
 First name: <input type="text" name="firstName"><br>
