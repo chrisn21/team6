@@ -68,6 +68,14 @@ public class AccountController {
 		else
 			return "login";
 	}
+	
+
+	@RequestMapping(value = "/updateQpts", method = RequestMethod.GET)
+	public String questionAnswered(Model model, HttpServletRequest request) {
+		String userid = request.getSession(true).getAttribute("userid").toString();
+    	service.updateQuestionPoints(userid, request.getParameter("correct"));
+    	return "home";
+	}
 		
 }
 

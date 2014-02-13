@@ -26,4 +26,14 @@ public class CharacterService {
     	return u;
     }
     
+    public void changeStats(String userid)
+    {
+    	Character c = getCharacter(userid).getCharacter();
+    	c.setExperience(c.getExperience() + 1);
+    	
+    	mongoTemplate.save(c, "User");
+    }
+    
+
+    
 }

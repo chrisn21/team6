@@ -17,7 +17,7 @@ public class User {
 	
 	private int questionsAttempted;
 	private int questionsCorrect;
-	
+	private int points;
 	public User (String firstName, String lastName, String username, String password, String email, String dob, Character character)
 	{
 		//Initialize column fields with parameter values
@@ -31,6 +31,7 @@ public class User {
 		
 		this.questionsAttempted = 0;
 		this.questionsCorrect = 0;
+		this.points = 0;
 	}
 	
 	public int getQA() {
@@ -71,5 +72,9 @@ public class User {
     
     public Character getCharacter() {
     	return character;
+    }
+    
+    public int getPoints() {
+    	return points;
     }
 }

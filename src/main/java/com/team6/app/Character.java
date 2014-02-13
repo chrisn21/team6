@@ -5,9 +5,11 @@ import org.springframework.data.annotation.Id;
 public class Character {
 
 	@Id //Fields of Character table/collection
+	private String id;
 	private String characterName;
 	private String character;
 	private int level;
+	private int levelThreshold;
 	private int experience;
 	private int health;
 	private int str;
@@ -20,7 +22,8 @@ public class Character {
 		this.characterName = characterName;
 		this.character = character;
 		this.level = 1;
-		this.experience = 50;
+		this.experience = 0;
+		this.levelThreshold = 5;
 		this.health = 150;
 		this.str = 1;
 		this.def = 1;
@@ -43,6 +46,11 @@ public class Character {
     	return this.experience;
     }
     
+    public void setExperience(int experience)
+    {
+    	this.experience = experience;
+    }
+    
     public int getHealth() {
     	return this.health;
     }
@@ -58,5 +66,10 @@ public class Character {
     public double getCritChance()
     {
     	return this.crit_chance;
+    }
+    
+    public int calculateThreshold()
+    {
+    	return this.level * 5;
     }
 }

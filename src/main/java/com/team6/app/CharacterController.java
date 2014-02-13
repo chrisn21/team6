@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -33,6 +34,12 @@ public class CharacterController {
     	System.out.println(u.getCharacter().getCharacterName());
     	return "home";
 	}
-		
+	
+	@RequestMapping(value = "/adjustStats", method = RequestMethod.GET)
+	public String adjustCharacterStats(@RequestParam("experience") String experience, Model model, HttpServletRequest request) {
+		String userid = request.getSession(true).getAttribute("userid").toString();
+		service.changeStats(userid);
+		return "home";
+	}
 }
 

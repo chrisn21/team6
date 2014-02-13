@@ -71,4 +71,22 @@ public class AccountService {
     	u.set("email", username);
     	mongoTemplate.findAndModify(q, u, User.class);
     }
+    
+    public void updateQuestionPoints(String userid, String correct)
+    {
+    	int offset = 0;
+    	if (correct.equals("Yes"))
+    		offset = 1;
+    	User u = mongoTemplate.findById(userid, User.class, "User");
+    	Query q = new Query(); 	q.addCriteria(Criteria.where("id").is(userid));
+    	Update up = new Update(); up.set("points", u.getPoints() + offset);
+    	mongoTemplate.findAndModify(q, up, User.class);
+
+    	Update up2 = new Update(); up2.set("questionsCorrect", u.getQC() + offset);
+    	mongoTemplate.findAndModify(q, up, User.class);
+    	
+    	Update up3 = new Update(); up3.set("questionsAttempted", u.getQA() + 1);
+    	mongoTemplate.findAndModify(q, up, User.class);
+    	
+    }
 }
