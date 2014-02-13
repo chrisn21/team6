@@ -2,10 +2,13 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Your Quiz Results</title>
+	<title>Quiz Results</title>
+	<jsp:include page="../includes.jsp"/>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 
+<div class="callout"></div>
 <p>Good work, ${userId}</p>
 
 </body>

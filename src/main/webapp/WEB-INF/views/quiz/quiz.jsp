@@ -3,9 +3,12 @@
 <html>
 <head>
 	<title>Quiz Time!</title>
+	<jsp:include page="../includes.jsp"/>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 
+<div class="callout"></div>
 <h1>${quiz.name}</h1>
 <p>${quiz.description}</p>
 <span>created by ${creator.username}</span>

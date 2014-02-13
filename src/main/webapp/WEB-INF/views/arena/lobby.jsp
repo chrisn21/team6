@@ -8,6 +8,7 @@
 <body>
 <jsp:include page="../header.jsp"/>
 
+<div class="callout"></div>
 <ul>
 	<c:forEach var="opponent" items="${opponents}">
 		<li><c:out value="${opponent.username}"/></li>

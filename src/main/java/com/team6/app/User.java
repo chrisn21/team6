@@ -33,6 +33,7 @@ public class User {
 		this.points = 0;
 	}
 	
+	//Simple getter-setter methods
 	public int getQA() {
         return questionsAttempted;
     }

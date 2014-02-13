@@ -3,12 +3,16 @@
 <html>
 <head>
 	<title>Login</title>
+	<jsp:include page="../includes.jsp"/>
 </head>
 <body>
-<p><a href="MyCharacter">My Character</a></p>
-<form action="login" method="POST">
+<jsp:include page="../header.jsp"/>
+
+<div class="callout"></div>
+<p>Sign-up <a href="signup">Here</a></p>
+<form action="verifyLogin" method="POST">
 	<input name="username" type="text" placeholder="Username">
-	<input name="password" type="text" placeholder="Password">
+	<input name="password" type="password" size="20" placeholder="Password">
 	<input type="submit" value="Login">
 </form>
 

@@ -3,8 +3,7 @@ package com.team6.app;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoAction;
-import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -18,47 +17,52 @@ public class AccountService {
     @Autowired
     private MongoTemplate mongoTemplate;
     
-    public static final String COLLECTION_NAME = "User";
      
-    public void addUser(User User) {
-        if (!mongoTemplate.collectionExists(User.class)) {
-            mongoTemplate.createCollection(User.class);
-        }       
-        mongoTemplate.insert(User, COLLECTION_NAME);
+    public void addUser(User user) 
+    {
+        if (!mongoTemplate.collectionExists(User.class)) {mongoTemplate.createCollection(User.class);}  //If collection doesn't exist, create it.     
+        
+        mongoTemplate.insert(user, Constants.USER_COLLECTION_NAME);
     }
      
-    public List<User> listUser() {
-        return mongoTemplate.findAll(User.class, COLLECTION_NAME);
+    public List<User> listAllUsers() {
+        return mongoTemplate.findAll(User.class, Constants.USER_COLLECTION_NAME);
     }
     
-    public List<User> listUser(Integer limit, Integer offset) {
-    	Query query = new Query().limit(limit).skip(offset);
-    	
-    	return mongoTemplate.find(query, User.class, COLLECTION_NAME);
-    }
-    
-    public User findByUsername(String username) {
+    //Search for user by their username
+    public User findByUsername(String username) 
+    {
     	Query query = new Query();
     	query.addCriteria(Criteria.where("username").is(username));
     	
-    	return mongoTemplate.findOne(query, User.class, COLLECTION_NAME);
+    	return mongoTemplate.findOne(query, User.class, Constants.USER_COLLECTION_NAME);
     }
     
-    public void deleteUser(User User) {
-        mongoTemplate.remove(User, COLLECTION_NAME);
+    //Remove user from user collection
+    public void deleteUser(User User) 
+    {
+        mongoTemplate.remove(User, Constants.USER_COLLECTION_NAME);
     }
-     
+    
+    //Verify whether registered user containing corresponding username and password fields exists
     public boolean verifyLogin(String username, String password)
     {
     	Query q = new Query();
     	q.addCriteria(Criteria.where("username").is(username).andOperator(Criteria.where("password").is(password)));
     	
-    	User user = mongoTemplate.findOne(q, User.class, COLLECTION_NAME);
+    	User user = mongoTemplate.findOne(q, User.class, Constants.USER_COLLECTION_NAME);
     	if(user == null)
     		return false;
     	
     	else
     		return true;
+    }
+    
+    public List<User> retrieveLeaderboard()
+    {
+		Query q = new Query().with(new Sort(Sort.Direction.DESC, "points"));
+		List<User> userList = mongoTemplate.find(q, User.class, Constants.USER_COLLECTION_NAME);
+		return userList;
     }
     
     public void updateUserEmail(String username, String email) {
@@ -69,6 +73,9 @@ public class AccountService {
     	mongoTemplate.findAndModify(q, u, User.class);
     }
     
+    
+    
+    /*
     public void updateQuestionFields(String username)
     {
     	Query q = new Query();
@@ -95,5 +102,5 @@ public class AccountService {
     	Update up3 = new Update(); up3.set("questionsAttempted", u.getQA() + 1);
     	mongoTemplate.findAndModify(q, up, User.class);
     	
-    }
+    }*/
 }

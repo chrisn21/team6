@@ -38,7 +38,7 @@ public class QuizController {
 		mv.addObject("quiz", quiz);
 		mv.addObject("questions", quizService.getQuizQuestions(quiz.getId()));
 		mv.addObject("creator", mo.findById(quiz.getCreatorId(), 
-				com.team6.app.User.class, Constants.USERS_COLLECTION_NAME));
+				com.team6.app.User.class, Constants.USER_COLLECTION_NAME));
 		return mv;
 	}
 	

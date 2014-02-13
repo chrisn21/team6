@@ -1,57 +1,34 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
-<script>
-function err(type, message)
-{
-	var err = new Error();
-	err.name = 'My API ' + type + ' Error';
-	err.message = message;
-	throw(err);
-}
-
-if(typeof this.output == 'undefined')
-{
-	delete this.output;
-	err('Output', 'Missing input');
-}
-
-var result = new Date(input);
-if (result == 'Invalid Date') 
-{
-	throw('Invalid Date was provided');
-}
-</script>
 <head>
-	<title>Home</title>
+	<title>Welcome to THE GAME</title>
+	<jsp:include page="includes.jsp"/>
 </head>
 <body>
-<h1>
-	Hello world!
-</h1>
-<p>Login <a href="login">HERE</a>.</p>
-<p>DO SOME QUIZZES <a href="quiz">HERE</a>.</p>
+<jsp:include page="header.jsp"/>
 
-<P>  The time on the server is ${serverTime}. </P>
-<P> ${userexists}</P>
-<%request.setAttribute("userexists", ""); %>
+<div class="callout"></div>
+<div class="grid">
+<%if(request.getSession(true).getAttribute("loggedin") == null)
+{%>
+	<p>Login <a href="login">Here</a></p>
+	<p>Sign-up <a href="signup">Here</a></p>
+<%
+}
+else
+{%>
+	<p><a href="MyCharacter">My Character</a></p>
+<%
+}%>
 
-<form action="Signup" method="POST">
-First name: <input type="text" name="firstName"><br>
-Last name: <input type="text" name="lastName"><br>
-User name: <input type="text" name="username"><br>
-Password: <input type="text" name="password"><br>
-Email: <input type="text" name="email"><br>
-DOB: <input type="text" name="dob"><br>
-Character Name: <input type="text" name="characterName"><br>
-<div>
-	<h4> Choose a character: </h4>
-	  <select name="character" id="userID" size="3">
-	   <option style="background-image:url(mushroom.png);">Joey</option>
-	  </select>
+<%if(request.getAttribute("userexists") != null) 
+{%>
+	<p><%= request.getAttribute("userexists") %></p>
+<%
+	request.setAttribute("userexists", null);
+}
+%>
 </div>
-<input type="submit" value="Submit">
-</form>
-
 </body>
 </html>

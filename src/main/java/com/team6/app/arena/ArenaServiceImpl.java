@@ -40,7 +40,7 @@ public class ArenaServiceImpl implements ArenaService {
 				limit(limit).
 				skip(offset);
 		return mo.find(query, com.team6.app.User.class,
-				Constants.USERS_COLLECTION_NAME);
+				Constants.USER_COLLECTION_NAME);
 	}
 
 	
