@@ -14,7 +14,7 @@ public class Quiz {
 	private String creatorId;
 	private String categoryId;
 	private Collection<String> questionIds;
-	private int difficulty;
+	private Integer difficulty;
 	private Date creationTime;
 	
 	public String getId() {
@@ -41,7 +41,7 @@ public class Quiz {
 		return questionIds;
 	}
 
-	public int getDifficulty() {
+	public Integer getDifficulty() {
 		return difficulty;
 	}
 

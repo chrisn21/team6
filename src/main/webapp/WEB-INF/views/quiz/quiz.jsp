@@ -8,11 +8,18 @@
 
 <h1>${quiz.name}</h1>
 <p>${quiz.description}</p>
+<span>created by ${creator.username}</span>
 
-<c:forEach var="question" items="${questions}">
-	<h3><c:out value="${question.question}"/></h3>
-	<p><c:out value="${question.answer}"/></p>
-</c:forEach>
+<form id="quiz-form" method="POST">
+
+	<c:forEach var="question" items="${questions}">
+		<p><c:out value="${question.question}"/></p>
+		<input type="text" />
+	</c:forEach>
+	
+	<input type="submit" value="Submit Answers">
+
+</form>
 
 </body>
 </html>

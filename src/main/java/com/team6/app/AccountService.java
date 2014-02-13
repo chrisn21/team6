@@ -31,6 +31,12 @@ public class AccountService {
         return mongoTemplate.findAll(User.class, COLLECTION_NAME);
     }
     
+    public List<User> listUser(Integer limit, Integer offset) {
+    	Query query = new Query().limit(limit).skip(offset);
+    	
+    	return mongoTemplate.find(query, User.class, COLLECTION_NAME);
+    }
+    
     public User findByUsername(String username) {
     	Query query = new Query();
     	query.addCriteria(Criteria.where("username").is(username));

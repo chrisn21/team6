@@ -8,8 +8,10 @@ public class Question {
 	private String id;
 	private String question;
 	private String answer;
-	private Integer timesAttempted;
-	private Boolean answered;
+	
+	public String getId() {
+		return id;
+	}
 	
 	public String getQuestion() {
 		return question;
@@ -17,14 +19,6 @@ public class Question {
 
 	public String getAnswer() {
 		return answer;
-	}
-
-	public Integer getTimesAttempted() {
-		return timesAttempted;
-	}
-
-	public Boolean getAnswered() {
-		return answered;
 	}
 	
 }

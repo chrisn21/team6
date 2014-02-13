@@ -1,5 +1,5 @@
 package com.team6.app.quiz;
-/*
+
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +9,12 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.team6.app.Constants;
-import com.team6.app.User;
-import com.team6.app.UserRepository;
 
 @Service
 public class QuizServiceImpl implements QuizService {
 
 	@Autowired
 	private MongoOperations db;
-	
-	@Autowired
-	private UserRepository userRepo;
 	
 	@Override
 	public Collection<Category> getCategories() {
@@ -48,9 +43,4 @@ public class QuizServiceImpl implements QuizService {
 				Constants.QUESTIONS_COLLECTION_NAME);
 	}
 
-	@Override
-	public User getCreator(String creatorId) {
-		return userRepo.findById(creatorId);
-	}
-
-}*/
+}
