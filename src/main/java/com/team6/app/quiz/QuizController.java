@@ -1,5 +1,5 @@
 package com.team6.app.quiz;
-
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,4 +49,4 @@ public class QuizController {
 		return mv;
 	}
 	
-}
+}*/

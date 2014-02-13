@@ -1,5 +1,5 @@
 package com.team6.app.quiz;
-
+/*
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +53,4 @@ public class QuizServiceImpl implements QuizService {
 		return userRepo.findById(creatorId);
 	}
 
-}
+}*/

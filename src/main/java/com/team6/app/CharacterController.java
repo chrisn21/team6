@@ -38,7 +38,7 @@ public class CharacterController {
 	@RequestMapping(value = "/adjustStats", method = RequestMethod.GET)
 	public String adjustCharacterStats(@RequestParam("experience") String experience, Model model, HttpServletRequest request) {
 		String userid = request.getSession(true).getAttribute("userid").toString();
-		service.changeStats(userid);
+		service.changeStats(userid, Integer.parseInt(experience));
 		return "home";
 	}
 }

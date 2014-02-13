@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Handles all account related requests.
@@ -41,7 +42,7 @@ public class AccountController {
 			
 			//System.out.println(user.getId());
 			request.getSession(true).setAttribute("userid", user.getId());
-			return "login";
+			return new ModelAndView("login");
 		}
 		else
 		{
@@ -70,10 +71,10 @@ public class AccountController {
 	
 
 	@RequestMapping(value = "/updateQpts", method = RequestMethod.GET)
-	public String questionAnswered(Model model, HttpServletRequest request) {
+	public String questionAnswered(Model model, @RequestParam("correct") String correct, HttpServletRequest request) {
 		String userid = request.getSession(true).getAttribute("userid").toString();
-    	service.updateQuestionPoints(userid, request.getParameter("correct"));
-    	return "home";
+    	service.updateQuestionPoints(userid, correct);
+    	return "/adjustStats";
 	}
 		
 }

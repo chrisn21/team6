@@ -1,5 +1,5 @@
 package com.team6.app.quiz;
-
+/*
 import java.util.Collection;
 import com.team6.app.User;
 
@@ -12,3 +12,4 @@ public interface QuizService {
 	public User getCreator(String creatorId);
 	
 }
+*/

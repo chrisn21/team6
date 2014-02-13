@@ -26,12 +26,17 @@ public class CharacterService {
     	return u;
     }
     
-    public void changeStats(String userid)
+    public void changeStats(String userid, int experience)
     {
     	Character c = getCharacter(userid).getCharacter();
-    	c.setExperience(c.getExperience() + 1);
-    	
-    	mongoTemplate.save(c, "User");
+    	System.out.println(c.getExperience());
+    	c.setExperience(c.getExperience() + experience);
+    	System.out.println(c.getExperience());
+    	Query q = new Query();
+    	q.addCriteria(Criteria.where("id").is(userid));
+    	Update u = new Update();
+    	u.set("Character", c);
+    	mongoTemplate.updateFirst(q, u, User.class);
     }
     
 
