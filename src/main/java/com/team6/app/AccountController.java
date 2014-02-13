@@ -23,16 +23,18 @@ public class AccountController {
 	@RequestMapping(value = "/Signup", method = RequestMethod.POST)
 	public String processSignup(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName, @RequestParam("username") String username,
-			@RequestParam("email") String email, @RequestParam("dob") String dob, Model model)
+			@RequestParam("password") String password, @RequestParam("email") String email, 
+			@RequestParam("dob") String dob, @RequestParam("character") String character, Model model)
 	{
+		System.out.println(character);
 		if(service.findByUsername(username) == null)
 		{
-			service.addUser(new User(firstName, lastName, username, email, dob));
+			service.addUser(new User(firstName, lastName, username, password, email, dob));
 			User user = service.findByUsername(username);
 			
 			System.out.println("Here's the user that just signed up: " + user.getFirstName() 
-				+ " " + user.getLastName() + " " + user.getUsername() + " " + user.getEmail() + " " + user.getDOB());
-
+				+ " " + user.getLastName() + " " + user.getUsername() + " " + user.getPassword() + " " + user.getEmail() + " " + user.getDOB());
+			
 			return "login";
 		}
 		else
@@ -50,8 +52,10 @@ public class AccountController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("username") String username, 
 			@RequestParam("password") String password, Model model) {
-		
-		return "login";
+		if(service.verifyLogin(username, password))
+			return "home";
+		else
+			return "login";
 	}
 		
 }

@@ -6,10 +6,7 @@
 </head>
 <body>
 
-<p>Your username is: ${username}</p>
-<p>Your password is: ${password}</p>
-
-<form method="POST">
+<form action="login" method="POST">
 	<input name="username" type="text" placeholder="Username">
 	<input name="password" type="text" placeholder="Password">
 	<input type="submit" value="Login">

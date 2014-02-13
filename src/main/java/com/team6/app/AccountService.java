@@ -47,8 +47,12 @@ public class AccountService {
     	Query q = new Query();
     	q.addCriteria(Criteria.where("username").is(username).andOperator(Criteria.where("password").is(password)));
     	
-    	User user = mongoTemplate.findOne(q, User.class);
-    	return false;
+    	User user = mongoTemplate.findOne(q, User.class, COLLECTION_NAME);
+    	if(user == null)
+    		return false;
+    	
+    	else
+    		return true;
     }
     
     public void updateUserEmail(String username, String email) {

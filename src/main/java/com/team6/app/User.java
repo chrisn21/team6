@@ -10,15 +10,17 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String username;
+	private String password;
 	private String email;
 	private String dob;
 	
-	public User (String firstName, String lastName, String username, String email, String dob)
+	public User (String firstName, String lastName, String username, String password, String email, String dob)
 	{
 		//Initialize column fields with parameter values
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
+		this.password = password;
 		this.email = email;
 		this.dob = dob;
 	}
@@ -37,6 +39,10 @@ public class User {
     
     public String getUsername() {
     	return username;
+    }
+    
+    public String getPassword() {
+    	return password;
     }
     
     public String getEmail() {
