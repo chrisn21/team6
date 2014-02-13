@@ -7,6 +7,12 @@
 <body>
 
 <h1>${quiz.name}</h1>
+<p>${quiz.description}</p>
+
+<c:forEach var="question" items="${questions}">
+	<h3><c:out value="${question.question}"/></h3>
+	<p><c:out value="${question.answer}"/></p>
+</c:forEach>
 
 </body>
 </html>

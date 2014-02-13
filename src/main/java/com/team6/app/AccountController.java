@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 /**
  * Handles all account related requests.
  */
@@ -23,7 +22,7 @@ public class AccountController {
 	private AccountService service;
 
 	@RequestMapping(value = "/Signup", method = RequestMethod.POST)
-	public String processSignup(@RequestParam("firstName") String firstName,
+	public ModelAndView processSignup(@RequestParam("firstName") String firstName,
 			@RequestParam("lastName") String lastName, @RequestParam("username") String username,
 			@RequestParam("password") String password, @RequestParam("email") String email, 
 			@RequestParam("dob") String dob, @RequestParam("character") String character, 
@@ -47,7 +46,7 @@ public class AccountController {
 		else
 		{
 			model.addAttribute("userexists", "<script>alert('Username already exists, try a different one.');</script>");
-			return "home";
+			return new ModelAndView("home");
 		}
 	}
 	

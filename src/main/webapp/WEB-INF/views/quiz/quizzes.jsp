@@ -13,5 +13,11 @@
 	<p><c:out value="${category.description}"/></p>
 </c:forEach>
 
+<ul>
+	<c:forEach var="quiz" items="${quizzes}">
+		<li><a href="quiz/${quiz.id}"><c:out value="${quiz.name}"/></a></li>
+	</c:forEach>
+</ul>
+
 </body>
 </html>

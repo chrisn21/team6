@@ -1,19 +1,52 @@
 package com.team6.app.quiz;
 
-import org.springframework.web.bind.annotation.ModelAttribute;
+import java.util.Collection;
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
 
 public class Quiz {
 
+	@Id
+	private String id;
 	private String name;
+	private String description;
+	private String creatorId;
+	private String categoryId;
+	private Collection<String> questionIds;
+	private int difficulty;
+	private Date creationTime;
 	
-	@ModelAttribute("name")
+	public String getId() {
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}
-	
-	@Override
-	public String toString() {
-		return name;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getCreatorId() {
+		return creatorId;
+	}
+
+	public String getCategoryId() {
+		return categoryId;
+	}
+
+	public Collection<String> getQuestionIds() {
+		return questionIds;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
+	}
+
+	public Date getCreationTime() {
+		return creationTime;
 	}
 	
 }
