@@ -1,14 +1,14 @@
 package com.team6.app.quiz;
 
 import java.util.Collection;
+import com.team6.app.User;
 
 public interface QuizService {
-
-	static final String CATEGORIES_COLLECTION_NAME = "categories";
-	static final String QUIZZES_COLLECTION_NAME = "quizzes";
 	
 	public Collection<Category> getCategories();
+	public Collection<Quiz> getQuizzes();
 	public Quiz getQuiz(String quizId);
-	public String getCreator(String quizId);
+	public Collection<Question> getQuizQuestions(String quizId);
+	public User getCreator(String creatorId);
 	
 }

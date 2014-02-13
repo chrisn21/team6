@@ -6,8 +6,9 @@
 </head>
 <body>
 
-<p>Your username is: ${username}</p>
-<p>Your password is: ${password}</p>
+<p>Your username is: ${user.username}</p>
+<p>Your name is: ${user.firstName} ${user.lastName}</p>
+<p>Your ID is: ${user.id}</p>
 
 <form method="POST">
 	<input name="username" type="text" placeholder="Username">

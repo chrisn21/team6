@@ -7,6 +7,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 
 	//findByFirstName finds user by their firstName, "String firstName" maps to the firstName column in Users
 	//Same with findByLastName
+	public User findById(String id);
     public User findByFirstName(String firstName);
     public User findByLastName(String lastName);
     public User findByUsername(String username);
