@@ -40,8 +40,16 @@ if (result == 'Invalid Date')
 First name: <input type="text" name="firstName"><br>
 Last name: <input type="text" name="lastName"><br>
 User name: <input type="text" name="username"><br>
+Password: <input type="text" name="password"><br>
 Email: <input type="text" name="email"><br>
 DOB: <input type="text" name="dob"><br>
+Character Name: <input type="text" name="characterName"><br>
+<div>
+	<h4> Choose a character: </h4>
+	  <select name="character" id="userID" size="3">
+	   <option style="background-image:url(mushroom.png);">Joey</option>
+	  </select>
+</div>
 <input type="submit" value="Submit">
 </form>
 
