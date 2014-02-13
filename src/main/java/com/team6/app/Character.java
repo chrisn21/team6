@@ -5,8 +5,8 @@ import org.springframework.data.annotation.Id;
 public class Character {
 
 	@Id //Fields of Character table/collection
-	private String username;
 	private String characterName;
+	private String character;
 	private int level;
 	private int experience;
 	private int health;
@@ -14,12 +14,11 @@ public class Character {
 	private int def;
 	private double crit_chance;
 	private static final int levelMax = 100;
-	public Character (String username, String characterName)
+	public Character (String character, String characterName)
 	{
 		//Initialize column fields with parameter values
-	
-		this.username = username;
 		this.characterName = characterName;
+		this.character = character;
 		this.level = 1;
 		this.experience = 50;
 		this.health = 150;
@@ -31,6 +30,10 @@ public class Character {
 	public String getCharacterName() {
         return this.characterName;
     }
+	
+	public String getCharacterType() {
+		return this.character;
+	}
 	
     public int getLevel() {
         return this.level;

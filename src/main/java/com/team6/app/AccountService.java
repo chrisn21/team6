@@ -62,4 +62,13 @@ public class AccountService {
     	u.set("email", email);
     	mongoTemplate.findAndModify(q, u, User.class);
     }
+    
+    public void updateQuestionFields(String username)
+    {
+    	Query q = new Query();
+    	q.addCriteria(Criteria.where("username").is(username));
+    	Update u = new Update();
+    	u.set("email", username);
+    	mongoTemplate.findAndModify(q, u, User.class);
+    }
 }

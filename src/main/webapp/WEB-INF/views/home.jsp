@@ -43,6 +43,7 @@ User name: <input type="text" name="username"><br>
 Password: <input type="text" name="password"><br>
 Email: <input type="text" name="email"><br>
 DOB: <input type="text" name="dob"><br>
+Character Name: <input type="text" name="characterName"><br>
 <div>
 	<h4> Choose a character: </h4>
 	  <select name="character" id="userID" size="3">
