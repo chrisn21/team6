@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team6.app.Constants;
+
 @Controller
 public class ArenaController {
 
@@ -22,10 +24,10 @@ public class ArenaController {
 		HttpSession sesh = req.getSession(false);
 		
 		if (sesh == null) {
-			mv = new ModelAndView("login");
+			mv = new ModelAndView(Constants.LOGIN_PATH_FILE);
 		} else {
 			String userId = (String) sesh.getAttribute("userid");
-			mv = new ModelAndView("arena/lobby");
+			mv = new ModelAndView(Constants.ARENA_LOBBY_PATH_FILE);
 			mv.addObject("opponents", 
 					arenaService.getOpponentsOf(userId, 0, 0));
 		}

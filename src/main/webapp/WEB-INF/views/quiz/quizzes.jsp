@@ -2,22 +2,35 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Quizzes</title>
+	<title>Quizzes - Level up here!</title>
+	<jsp:include page="../includes.jsp"/>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 
-<h1>Here dem quiz categories!!</h1>
+<div class="callout"></div>
+<div class="grid">
+<div class="tab-content">
+	<div class="col_12">
+		<c:forEach var="category" items="${categories}">
+			<article class="clearfix">
+				<h4><c:out value="${category.name}"/></h4>
+				<p><c:out value="${category.description}"/></p>
+			</article>
+		</c:forEach>
+	</div>
 
-<c:forEach var="category" items="${categories}">
-	<h2><c:out value="${category.name}"/></h2>
-	<p><c:out value="${category.description}"/></p>
-</c:forEach>
-
-<ul>
-	<c:forEach var="quiz" items="${quizzes}">
-		<li><a href="quiz/${quiz.id}"><c:out value="${quiz.name}"/></a></li>
-	</c:forEach>
-</ul>
+	<div class="col_3">
+		<c:forEach var="quiz" items="${quizzes}">
+			<article class="post clearfix">
+				<h4>
+				<a href="quiz/${quiz.id}"><c:out value="${quiz.name}"/></a>
+				</h4>
+			</article>
+		</c:forEach>
+	</div>
+</div>
+</div>
 
 </body>
 </html>

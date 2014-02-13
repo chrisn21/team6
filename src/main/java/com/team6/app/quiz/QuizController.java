@@ -25,7 +25,7 @@ public class QuizController {
 	
 	@RequestMapping(value = "/quiz", method = RequestMethod.GET)
 	public ModelAndView showQuizzes() {
-		ModelAndView mv = new ModelAndView("quiz/quizzes");
+		ModelAndView mv = new ModelAndView(Constants.QUIZZES_PATH_FILE);
 		mv.addObject("categories", quizService.getCategories());
 		mv.addObject("quizzes", quizService.getQuizzes());
 		return mv;
@@ -33,7 +33,7 @@ public class QuizController {
 	
 	@RequestMapping(value = "/quiz/{quizId}", method = RequestMethod.GET)
 	public ModelAndView showQuiz(@PathVariable String quizId) {
-		ModelAndView mv = new ModelAndView("quiz/quiz");
+		ModelAndView mv = new ModelAndView(Constants.QUIZ_PATH_FILE);
 		Quiz quiz = quizService.getQuiz(quizId);
 		mv.addObject("quiz", quiz);
 		mv.addObject("questions", quizService.getQuizQuestions(quiz.getId()));
@@ -54,7 +54,7 @@ public class QuizController {
 			mv = new ModelAndView("404");
 		} else {
 			String userId = (String) sesh.getAttribute("userid");
-			mv = new ModelAndView("quiz/quiz-result");
+			mv = new ModelAndView(Constants.QUIZ_RESULT_PATH_FILE);
 			mv.addObject("userId", userId);
 		}
 		return mv;
@@ -62,14 +62,14 @@ public class QuizController {
 	
 	@RequestMapping(value = "/quiz/create", method = RequestMethod.GET)
 	public ModelAndView showCreateQuiz() {
-		ModelAndView mv = new ModelAndView("quiz/create");
+		ModelAndView mv = new ModelAndView(Constants.QUIZ_CREATE_PATH_FILE);
 		
 		return mv;
 	}
 	
 	@RequestMapping(value = "/quiz/create", method = RequestMethod.POST)
 	public ModelAndView createQuiz() {
-		ModelAndView mv = new ModelAndView("quiz/create");
+		ModelAndView mv = new ModelAndView(Constants.QUIZ_CREATE_PATH_FILE);
 		
 		return mv;
 	}

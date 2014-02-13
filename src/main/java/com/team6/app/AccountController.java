@@ -42,18 +42,18 @@ public class AccountController {
 			
 			//System.out.println(user.getId());
 			request.getSession(true).setAttribute("userid", user.getId());
-			return new ModelAndView("login");
+			return new ModelAndView(Constants.LOGIN_PATH_FILE);
 		}
 		else
 		{
 			model.addAttribute("userexists", "<script>alert('Username already exists, try a different one.');</script>");
-			return new ModelAndView("home");
+			return new ModelAndView(Constants.HOME_PATH_FILE);
 		}
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginView() {
-		return "login";
+		return Constants.LOGIN_PATH_FILE;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -63,10 +63,10 @@ public class AccountController {
 		{
 	    	User u = service.findByUsername(username);
 	    	request.getSession(true).setAttribute("userid", u.getId());
-			return "home";
+			return Constants.HOME_PATH_FILE;
 		}
 		else
-			return "login";
+			return Constants.LOGIN_PATH_FILE;
 	}
 	
 

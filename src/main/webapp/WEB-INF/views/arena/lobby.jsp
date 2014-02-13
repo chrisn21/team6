@@ -2,9 +2,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>The Arena</title>
+	<title>Arena Lobby</title>
+	<jsp:include page="../includes.jsp"/>
 </head>
 <body>
+<jsp:include page="../header.jsp"/>
 
 <ul>
 	<c:forEach var="opponent" items="${opponents}">

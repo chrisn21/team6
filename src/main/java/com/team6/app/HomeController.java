@@ -31,7 +31,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("userchoice", "");
-		return "home";
+		return Constants.HOME_PATH_FILE;
 	}
 	
 }
