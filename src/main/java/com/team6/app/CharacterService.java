@@ -1,10 +1,7 @@
 package com.team6.app;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoAction;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -17,26 +14,26 @@ public class CharacterService {
      
     @Autowired
     private MongoTemplate mongoTemplate;
-    
-    public static final String COLLECTION_NAME = "Character";
      
+    //Retrieve character associated with the user's id
     public User getCharacter(String userid)
     {
-    	User u = mongoTemplate.findById(userid, User.class, "User");
-    	return u;
+    	User user = mongoTemplate.findById(userid, User.class, "User");
+    	return user;
     }
     
+    //Update the statistics for the retrieved character
     public void changeStats(String userid, int experience)
     {
     	Character c = getCharacter(userid).getCharacter();
-    	System.out.println(c.getExperience());
     	c.setExperience(c.getExperience() + experience);
-    	System.out.println(c.getExperience());
+    	c.checkLevel();
+    	
     	Query q = new Query();
     	q.addCriteria(Criteria.where("id").is(userid));
     	Update u = new Update();
-    	u.set("Character", c);
-    	mongoTemplate.updateFirst(q, u, User.class);
+    	u.set("character", c);
+    	mongoTemplate.findAndModify(q, u, User.class, Constants.USER_COLLECTION_NAME);
     }
     
 

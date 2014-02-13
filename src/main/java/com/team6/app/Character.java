@@ -42,6 +42,10 @@ public class Character {
         return this.level;
     }
     
+    public int getThreshold() {
+    	return this.levelThreshold;
+    }
+    
     public int getExperience() {
     	return this.experience;
     }
@@ -68,8 +72,26 @@ public class Character {
     	return this.crit_chance;
     }
     
+    public void checkLevel()
+    {
+    	if(this.experience >= this.levelThreshold)
+    	{
+    		this.experience = 0;
+    		this.level = this.level + 1;
+    		this.levelThreshold = calculateThreshold();
+    		this.health += 20;
+    		this.str += 5;
+    		this.def += 3;
+    	}
+    }
+    
     public int calculateThreshold()
     {
     	return this.level * 5;
+    }
+    
+    public void setname(String name)
+    {
+    	this.characterName = name;
     }
 }
