@@ -30,14 +30,8 @@ public class CharacterController {
 		String userid = request.getSession(true).getAttribute("userid").toString();
     	User user = service.getCharacter(userid);
     	Character c = user.getCharacter();
-    	String characterinfo = "<div id=\"characterinfo\"><h4>" + user.getUsername() 
-    			+ "'s Character Stats: </h4><img src=\"mushroom.png\" alt=\"mushroom head\" height=\"42\" width=\"42\">"
-				+ "<table><tr><td>Character Name: " + c.getCharacterName()	+ "</td></tr><tr><td>Level: " + c.getLevel() 
-				+ "</td></tr><tr><td>Experience: " + c.getExperience() + " / " + c.getThreshold()
-    			+ "</td></tr><tr><td>Health: " + c.getHealth()	+ "</td></tr><tr><td>Strength: " + c.getStr() 
-    			+ "</td></tr><tr><td>Defense: " + c.getDef() + "</td></tr></table></div>";
     	
-    	model.addAttribute("characterstats", characterinfo);
+    	model.addAttribute("character", c);
     	return new ModelAndView(Constants.CHAR_PROFILE_PATH_FILE);
 	}
 	

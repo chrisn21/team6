@@ -18,11 +18,11 @@ public class AccountService {
     private MongoTemplate mongoTemplate;
     
      
-    public void addUser(User user) 
+    public void addUser(User User) 
     {
         if (!mongoTemplate.collectionExists(User.class)) {mongoTemplate.createCollection(User.class);}  //If collection doesn't exist, create it.     
         
-        mongoTemplate.insert(user, Constants.USER_COLLECTION_NAME);
+        mongoTemplate.insert(User, Constants.USER_COLLECTION_NAME);
     }
      
     public List<User> listAllUsers() {

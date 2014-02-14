@@ -3,13 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <script>
-function err(type, message)
-{
-	var err = new Error();
-	err.name = 'My API ' + type + ' Error';
-	err.message = message;
-	throw(err);
-}
 
 function validateForm()
 {
@@ -49,20 +42,14 @@ function isDate(txtDate)
 
 <div class="callout"></div>
 	<form name="acctSignup" action="processSignup" onsubmit="return validateForm()" method="POST">
-	First name: <input type="text" name="firstName"><br>
-	Last name: <input type="text" name="lastName"><br>
-	User name: <input type="text" name="username"><br>
-	Password: <input type="password" size="20" name="password"><br>
-	Email: <input type="text" name="email"><br>
-	DOB [MM/DD/YYYY]: <input type="text" name="dob"><br>
-	Character Name: <input type="text" name="characterName"><br>
-		<div>
-			<h4> Choose a character: </h4>
-			  <select name="character" id="userID" size="3">
-			   <option style="background-image:url(mushroom.png);">Joey</option>
-			  </select>
-		</div>
-	<input type="submit" value="Submit">
-</form>
+	First name: 		<input type="text" name="firstName"><br>
+	Last name: 			<input type="text" name="lastName"><br>
+	User name: 			<input type="text" name="username"><br>
+	Password: 			<input type="password" size="20" name="password"><br>
+	Email: 				<input type="text" name="email"><br>
+	DOB [MM/DD/YYYY]: 	<input type="text" name="dob"><br>
+	Character Name: 	<input type="text" name="characterName"><br>
+	<div><img src="/app/resources/charizardsprite.png" alt="Smiley face" height="120" width="120"><input type="submit" name="character" value="Charizard"></div>
+	</form>
 </body>
 </html>
