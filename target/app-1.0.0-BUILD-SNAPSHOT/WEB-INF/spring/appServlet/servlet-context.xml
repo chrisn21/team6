@@ -3,9 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/data/mongo
+        http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -25,12 +31,19 @@
 	<!-- Factory bean that creates the Mongo instance -->
     <beans:bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean"/>
      
-     
     <!-- MongoTemplate for connecting and quering the documents in the database -->
     <beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
-        <beans:constructor-arg name="mongo" ref="mongo" />
-        <beans:constructor-arg name="databaseName" value="enp-db" />
+        <beans:constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
     </beans:bean>
-	
+    
+    <mongo:db-factory id="mongoDbFactory"
+                  host="widmore.mongohq.com"
+                  port="10000"
+                  username="team6"
+                  password="team6y"
+                  dbname="enp-db"
+                  mongo-ref="mongo" />
+                  
+    <mongo:mongo id="mongo" host="widmore.mongohq.com" port="10000" />
 	
 </beans:beans>
