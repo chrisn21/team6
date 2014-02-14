@@ -42,7 +42,7 @@ public class Character {
         return this.level;
     }
     
-    public int getThreshold() {
+    public int getLevelThreshold() {
     	return this.levelThreshold;
     }
     

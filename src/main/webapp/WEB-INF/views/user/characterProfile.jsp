@@ -4,6 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<title>My Character Profile</title>
 	<jsp:include page="../includes.jsp"/>
 </head>
@@ -12,10 +13,15 @@
 
 <div class="callout"></div>
 <p><a href="leaderboard">Leader board</a></p>
-	<form action="adjustStats" method="GET">
-		<input type="hidden" name="experience" value="1">
-		<input type="submit" value="Adjust Character Stats">
-	</form>
-<P> ${characterstats} </P>
+<div id="characterprofile">
+	<table><tr><td><h4>Character Stats:</h4></td></tr>
+			<tr><td>Character Name: <c:out value="${character.characterName}"/></td></tr>
+			<tr><td>Level: 			<c:out value="${character.level}"/></td></tr>
+			<tr><td>Experience:		<c:out value="${character.experience}"/></td></tr>
+			<tr><td>Health:			<c:out value="${character.health}"/></td></tr>
+			<tr><td>Strength:		<c:out value="${character.str}"/></td></tr>
+			<tr><td>Defense:		<c:out value="${character.def}"/></td></tr>
+	</table>
+</div>
 </body>
 </html>

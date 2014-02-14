@@ -77,15 +77,8 @@ public class AccountController {
 	@RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
 	public ModelAndView queryLeaderboard(Model model, HttpServletRequest request)
 	{
-		String leaderboardDisplay = "<div id=\"leaderboard\"><table><tr><td> Username </td><td> Points </td></tr>";
 		List<User> leaderboard = service.retrieveLeaderboard();
-		for(User user : leaderboard)
-		{
-			leaderboardDisplay += "<tr><td>" + user.getUsername() + "</td><td>" + user.getPoints() + "</td></tr>";
-		}
-		
-		leaderboardDisplay += "</table></div>";
-		request.setAttribute("leaderboard", leaderboardDisplay);
+		request.setAttribute("leaderboard", leaderboard);
 		return new ModelAndView(Constants.LEADERBOARD_PATH_FILE);
 	}
 	
