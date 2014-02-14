@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team6.app.AccountService;
 import com.team6.app.Constants;
-import com.team6.app.User;
 
 @Controller
 public class ArenaController {
@@ -25,17 +24,23 @@ public class ArenaController {
 	private AccountService accService;
 	
 	@RequestMapping(value = "/arena", method = RequestMethod.GET)
-	public ModelAndView showLobby(HttpServletRequest req) {
+	public ModelAndView showLobby(HttpServletRequest req,
+			@RequestParam(value = "limit", required = false) String limit,
+			@RequestParam(value = "offset", required = false) String offset) {
 		ModelAndView mv;
 		HttpSession sesh = req.getSession(false);
+		System.out.println("LIMIT: " + limit);
+		System.out.println("OFFSET: " + offset);
 		
 		if (sesh == null) {
-			mv = new ModelAndView(Constants.LOGIN_PATH_FILE);
+			mv = new ModelAndView("redirect:/login");
 		} else {
 			String userId = (String) sesh.getAttribute("userid");
 			mv = new ModelAndView(Constants.ARENA_LOBBY_PATH_FILE);
-			mv.addObject("opponents", 
-					arenaService.getOpponentsOf(userId, 0, 0));
+			mv.addObject("opponents",
+					arenaService.getPotentialOpponentsOf(userId, limit, offset));
+			mv.addObject("battles",
+					arenaService.getBattlesByUserId(userId));
 		}
 		return mv;
 	}
@@ -46,7 +51,7 @@ public class ArenaController {
 		HttpSession sesh = req.getSession(false);
 		
 		if (sesh == null) {
-			return new ModelAndView(Constants.LOGIN_PATH_FILE);
+			return new ModelAndView("redirect:/login");
 		}
 		
 		String thisUserId = (String) sesh.getAttribute("userid");
@@ -56,10 +61,8 @@ public class ArenaController {
 			return new ModelAndView(Constants.NOT_FOUND_PATH_FILE);
 		}
 		
-		return showLobby(req);
-//		ModelAndView mv = new ModelAndView(Constants.ARENA_LOBBY_PATH_FILE);
-//		
-//		return mv;
+		ModelAndView mv = new ModelAndView("redirect:/arena");
+		return mv;
 	}
 	
 	@RequestMapping(value = "/arena/{battleId}", method = RequestMethod.GET)
@@ -72,7 +75,7 @@ public class ArenaController {
 			return new ModelAndView(Constants.LOGIN_PATH_FILE);
 		}
 
-		Battle battle = arenaService.getBattle(battleId);
+		Battle battle = arenaService.getBattleById(battleId);
 		String thisUserId = (String) sesh.getAttribute("userid");
 		
 		if (thisUserId == null ||
@@ -104,4 +107,28 @@ public class ArenaController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "/arena/{battleId}", method = RequestMethod.POST)
+	public ModelAndView showBattle(HttpServletRequest req,
+			@PathVariable String battleId,
+			@RequestParam("cmd") String cmd) {
+		HttpSession sesh = req.getSession(false);
+		
+		if (sesh == null) {
+			// Invalid session
+			return new ModelAndView(Constants.LOGIN_PATH_FILE);
+		}
+
+		Battle battle = arenaService.getBattleById(battleId);
+		String thisUserId = (String) sesh.getAttribute("userid");
+		
+		if (thisUserId == null ||
+				!thisUserId.equals(battle.getUserId1()) &&
+				!thisUserId.equals(battle.getUserId2())) {
+			// Current user isn't in battle
+			return new ModelAndView(Constants.NOT_FOUND_PATH_FILE);
+		}
+		
+		arenaService.doBattleCommand(battleId, thisUserId, cmd);
+		return showBattle(req, battleId);
+	}
 }

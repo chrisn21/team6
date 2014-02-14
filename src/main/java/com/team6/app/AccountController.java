@@ -68,10 +68,10 @@ public class AccountController {
     	User u = service.findByUsername(username);
     	request.getSession(true).setAttribute("loggedin", true);
     	request.getSession(true).setAttribute("userid", u.getId());
-			return new ModelAndView(Constants.HOME_PATH_FILE);
+			return new ModelAndView("redirect:/");
 		}
 		else
-			return new ModelAndView(Constants.LOGIN_PATH_FILE);
+			return new ModelAndView("redirect:login");
 	}
 	
 	@RequestMapping(value = "/leaderboard", method = RequestMethod.GET)

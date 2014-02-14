@@ -39,8 +39,11 @@ function isDate(txtDate)
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+<div class="callout">
+<h1>Sign-Up</h1>
+<h5>Let's get started!</h5>
+</div>
 
-<div class="callout"></div>
 	<form name="acctSignup" action="processSignup" onsubmit="return validateForm()" method="POST">
 	First name: 		<input type="text" name="firstName"><br>
 	Last name: 			<input type="text" name="lastName"><br>

@@ -10,8 +10,11 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+<div class="callout">
+<h1>Leaderboard</h1>
+<h5>Can you make it to the top?</h5>
+</div>
 
-<div class="callout"></div>
 <div id="leaderboard">
 	<table><tr><td> Username </td><td> Points </td></tr>
 		<c:forEach var="user" items="${leaderboard}">
