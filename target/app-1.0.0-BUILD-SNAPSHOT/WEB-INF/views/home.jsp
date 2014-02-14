@@ -2,23 +2,33 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>Welcome to THE GAME</title>
+	<jsp:include page="includes.jsp"/>
 </head>
 <body>
-<h1>
-	Hello world!
-</h1>
-<p>Login <a href="login">HERE</a>.</p>
-<p>Play games <a href="games">HERE</a>.</p>
+<jsp:include page="header.jsp"/>
 
-<P>  The time on the server is ${serverTime}. </P>
+<div class="callout"></div>
+<div class="grid">
+<%if(request.getSession(true).getAttribute("loggedin") == null)
+{%>
+	<p>Login <a href="login">Here</a></p>
+	<p>Sign-up <a href="signup">Here</a></p>
+<%
+}
+else
+{%>
+	<p><a href="MyCharacter">My Character</a></p>
+<%
+}%>
 
-<form action="Signup" method="POST">
-First name: <input type="text" name="firstName"><br>
-Last name: <input type="text" name="lastName"><br>
-User name: <input type="text" name="username"><br>
-<input type="submit" value="Submit">
-</form>
-
+<%if(request.getAttribute("userexists") != null) 
+{%>
+	<p><%= request.getAttribute("userexists") %></p>
+<%
+	request.setAttribute("userexists", null);
+}
+%>
+</div>
 </body>
 </html>

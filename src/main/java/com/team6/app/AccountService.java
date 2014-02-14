@@ -38,6 +38,12 @@ public class AccountService {
     	return mongoTemplate.findOne(query, User.class, Constants.USER_COLLECTION_NAME);
     }
     
+    //Search for user by their ID
+    public User findById(String userId) 
+    {
+    	return mongoTemplate.findById(userId, User.class, Constants.USER_COLLECTION_NAME);
+    }
+    
     //Remove user from user collection
     public void deleteUser(User User) 
     {
