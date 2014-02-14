@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team6.app.AccountService;
 import com.team6.app.Constants;
 
 @Controller
@@ -21,7 +21,7 @@ public class QuizController {
 	private QuizService quizService;
 	
 	@Autowired
-	private MongoOperations mo;
+	private AccountService accService;
 	
 	@RequestMapping(value = "/quiz", method = RequestMethod.GET)
 	public ModelAndView showQuizzes() {
@@ -37,8 +37,7 @@ public class QuizController {
 		Quiz quiz = quizService.getQuiz(quizId);
 		mv.addObject("quiz", quiz);
 		mv.addObject("questions", quizService.getQuizQuestions(quiz.getId()));
-		mv.addObject("creator", mo.findById(quiz.getCreatorId(), 
-				com.team6.app.User.class, Constants.USER_COLLECTION_NAME));
+		mv.addObject("creator", accService.findById(quiz.getCreatorId()));
 		return mv;
 	}
 	

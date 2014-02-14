@@ -29,7 +29,7 @@
     <!-- MongoTemplate for connecting and quering the documents in the database -->
     <beans:bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
         <beans:constructor-arg name="mongo" ref="mongo" />
-        <beans:constructor-arg name="databaseName" value="enp_db" />
+        <beans:constructor-arg name="databaseName" value="enp-db" />
     </beans:bean>
 	
 	

@@ -7,17 +7,13 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-
 <div class="callout"></div>
-<ul>
-	<c:forEach var="opponent" items="${opponents}">
-		<li>
-			<a href="<c:url value="arena/create?userId2=${opponent.id}"/>">
-				<c:out value="${opponent.username}"/>
-			</a>
-		</li>
-	</c:forEach>
-</ul>
+
+<div>
+<c:forEach var="msg" items="${log}">
+	<p><c:out value="${msg}"/></p>
+</c:forEach>
+</div>
 
 </body>
 </html>
