@@ -9,7 +9,18 @@
 <jsp:include page="../header.jsp"/>
 <div class="callout"></div>
 
-<div>
+<div id="commands">
+<c:if test="${isActiveTurn}">
+	<p>hey dude its your turn</p>
+</c:if>
+</div>
+
+<div id="portraits">
+	<img src="<c:url value="/resources/img/${char1.character}.png"/>"/>
+	<img src="<c:url value="/resources/img/${char2.character}.png"/>"/>
+</div>
+
+<div id="log">
 <c:forEach var="msg" items="${log}">
 	<p><c:out value="${msg}"/></p>
 </c:forEach>

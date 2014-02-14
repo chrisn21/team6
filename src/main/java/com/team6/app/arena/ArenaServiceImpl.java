@@ -49,7 +49,6 @@ public class ArenaServiceImpl implements ArenaService {
 				Constants.USER_COLLECTION_NAME);
 	}
 
-	
 	@Override
 	public Battle createBattle(String userId1, String userId2) {
 		User user1 = accService.findById(userId1);

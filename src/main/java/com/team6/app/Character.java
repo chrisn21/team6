@@ -34,8 +34,8 @@ public class Character {
         return this.characterName;
     }
 	
-	public String getCharacterType() {
-		return this.character;
+	public String getCharacter() {
+		return this.character.toLowerCase();
 	}
 	
     public int getLevel() {
