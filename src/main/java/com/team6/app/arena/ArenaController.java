@@ -29,29 +29,31 @@ public class ArenaController {
 			@RequestParam(value = "offset", required = false) String offset) {
 		ModelAndView mv;
 		HttpSession sesh = req.getSession(false);
-		System.out.println("LIMIT: " + limit);
-		System.out.println("OFFSET: " + offset);
 		
 		if (sesh == null) {
 			mv = new ModelAndView("redirect:/login");
-		} else {
-			String userId = (String) sesh.getAttribute("userid");
-			mv = new ModelAndView(Constants.ARENA_LOBBY_PATH_FILE);
-			mv.addObject("opponents",
-					arenaService.getPotentialOpponentsOf(userId, limit, offset));
-			mv.addObject("battles",
-					arenaService.getBattlesByUserId(userId));
 		}
+		
+		String userId = (String) sesh.getAttribute("userid");
+		if (userId == null) {
+			return new ModelAndView("redirect:/login");
+		}
+		
+		mv = new ModelAndView(Constants.ARENA_LOBBY_PATH_FILE);
+		mv.addObject("opponents",
+				arenaService.getPotentialOpponentsOf(userId, limit, offset));
+		mv.addObject("battles",
+				arenaService.getBattlesByUserId(userId));
 		return mv;
 	}
 	
-	@RequestMapping(value = "/arena/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/arena", method = RequestMethod.POST)
 	public ModelAndView showLobby(HttpServletRequest req,
 			@RequestParam(value = "userId2") String userId2) {
 		HttpSession sesh = req.getSession(false);
 		
 		if (sesh == null) {
-			return new ModelAndView("redirect:/login");
+			return new ModelAndView(Constants.NOT_FOUND_PATH_FILE);
 		}
 		
 		String thisUserId = (String) sesh.getAttribute("userid");
@@ -72,7 +74,7 @@ public class ArenaController {
 		
 		if (sesh == null) {
 			// Invalid session
-			return new ModelAndView(Constants.LOGIN_PATH_FILE);
+			return new ModelAndView(Constants.NOT_FOUND_PATH_FILE);
 		}
 
 		Battle battle = arenaService.getBattleById(battleId);
@@ -115,7 +117,7 @@ public class ArenaController {
 		
 		if (sesh == null) {
 			// Invalid session
-			return new ModelAndView(Constants.LOGIN_PATH_FILE);
+			return new ModelAndView(Constants.NOT_FOUND_PATH_FILE);
 		}
 
 		Battle battle = arenaService.getBattleById(battleId);
