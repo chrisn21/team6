@@ -253,6 +253,9 @@ public class ArenaServiceImpl implements ArenaService {
 				battle.getLog().add(String.format("% is charging for an attack.",
 						char1.getCharacterName()));
 			}
+
+			battle.setUserCmd1("");
+			battle.setUserCmd2("");
 		}
 		
 		mo.save(battle, Constants.BATTLES_COLLECTION_NAME);
