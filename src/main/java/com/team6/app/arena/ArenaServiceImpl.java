@@ -97,9 +97,10 @@ public class ArenaServiceImpl implements ArenaService {
 		Battle battle = new Battle();
 		battle.setUserId1(userId1);
 		battle.setUserId2(userId2);
+		battle.setUserCmd1("");
+		battle.setUserCmd2("");
 		battle.setChar1(user1.getCharacter());
 		battle.setChar2(user2.getCharacter());
-		battle.setUser1Turn(true);
 		battle.setLog(log);
 		
 		mo.insert(battle, Constants.BATTLES_COLLECTION_NAME);
@@ -144,17 +145,121 @@ public class ArenaServiceImpl implements ArenaService {
 	}
 	
 	@Override
-	public void doBattleCommand(String battleId, String userId, String cmd) {
-		if (cmd == null) {
+	public void doBattleCommand(Battle battle, String userId, String cmd) {
+		if (!cmd.equalsIgnoreCase("attack") &&
+				!cmd.equalsIgnoreCase("charge") &&
+				!cmd.equalsIgnoreCase("defend")) {
+			// Invalid command. Change nothing
 			return;
 		}
-		Query query = new Query(Criteria.where("_id").is(battleId)).limit(1);
-		Update update = new Update().inc("char1.health",
-				cmd.equalsIgnoreCase("attack") ? -1 : 1);
 		
-		mo.findAndModify(query, update,
-				Battle.class,
-				Constants.BATTLES_COLLECTION_NAME);
+		if (battle.getUserId1().equals(userId)) {
+			if (cmd.equalsIgnoreCase("attack")) {
+				if (!battle.getChar1().isCharged()) {
+					// Can't attack if not charged
+					return;
+				}
+			}
+			battle.setUserCmd1(cmd);
+			
+		} else if (battle.getUserId2().equals(userId)) {
+			if (cmd.equalsIgnoreCase("attack")) {
+				if (!battle.getChar2().isCharged()) {
+					// Can't attack if not charged
+					return;
+				}
+			}
+			battle.setUserCmd2(cmd);
+		} else {
+			// Not a participating user. Change nothing
+			return;
+		}
+		
+		if (!battle.getUserCmd1().isEmpty() && !battle.getUserCmd2().isEmpty()) {
+			String cmd1 = battle.getUserCmd1().toLowerCase();
+			String cmd2 = battle.getUserCmd2().toLowerCase();
+			com.team6.app.Character char1 = battle.getChar1();
+			com.team6.app.Character char2 = battle.getChar2();
+			int rawDmgTo2 = calculateDmg(
+					char1.getLevel(),
+					char1.getStr(),
+					char1.getCritChance(),
+					0);
+			int rawDmgTo1 = calculateDmg(
+					char2.getLevel(),
+					char2.getStr(),
+					char2.getCritChance(),
+					0);
+//			int mitigatedDmgTo2 = calculateDmg(
+//					char1.getLevel(),
+//					char1.getStr(),
+//					char1.getCritChance(),
+//					char2.getDef());
+//			int mitigatedDmgTo1 = calculateDmg(
+//					char2.getLevel(),
+//					char2.getStr(),
+//					char2.getCritChance(),
+//					char1.getDef());
+			
+			if (cmd1.equals("attack") && cmd2.equals("attack")) {
+				char1.incrementHealth(-rawDmgTo1);
+				char2.incrementHealth(-rawDmgTo2);
+				battle.getLog().add(String.format("%s attacked %s for %d of damage!",
+						char1.getCharacterName(),
+						char2.getCharacterName(),
+						rawDmgTo2));
+				battle.getLog().add(String.format("%s attacked %s for %d of damage!",
+						char2.getCharacterName(),
+						char1.getCharacterName(),
+						rawDmgTo1));
+			} else if (cmd1.equals("defend") && cmd2.equals("defend")) {
+				battle.getLog().add(String.format("%s and %s both tried to defend! It wasn't very effective....",
+						char1.getCharacterName(),
+						char2.getCharacterName()));
+			} else if (cmd1.equals("charge") && cmd2.equals("charge")) {
+				char1.setCharged(true);
+				char2.setCharged(true);
+				battle.getLog().add(String.format("%s and %s both charged their attacks! Things are really heating up!",
+						char1.getCharacterName(),
+						char2.getCharacterName()));
+			} else if (cmd1.equals("attack") && cmd2.equals("defend")) {
+				battle.getLog().add(String.format("%s attacked %s, who was defending! It wasn't very effective....",
+						char1.getCharacterName(),
+						char2.getCharacterName()));
+			} else if (cmd1.equals("attack") && cmd2.equals("charge")) {
+				char2.incrementHealth(-rawDmgTo2);
+				battle.getLog().add(String.format("%s attacked %s, who was trying to charge an attack! It was very effective!",
+						char1.getCharacterName(),
+						char2.getCharacterName()));
+			} else if (cmd1.equals("defend") && cmd2.equals("attack")) {
+				battle.getLog().add(String.format("%s attacked %s, who was defending! It wasn't very effective....",
+						char2.getCharacterName(),
+						char1.getCharacterName()));
+			} else if (cmd1.equals("defend") && cmd2.equals("charge")) {
+				char2.setCharged(true);
+				battle.getLog().add(String.format("% is defending.",
+						char1.getCharacterName()));
+				battle.getLog().add(String.format("% is charging for an attack.",
+						char2.getCharacterName()));
+			} else if (cmd1.equals("charge") && cmd2.equals("attack")) {
+				char1.incrementHealth(-rawDmgTo2);
+				battle.getLog().add(String.format("%s attacked %s, who was trying to charge an attack! It was very effective!",
+						char2.getCharacterName(),
+						char1.getCharacterName()));
+			} else if (cmd1.equals("charge") && cmd2.equals("defend")) {
+				char1.setCharged(true);
+				battle.getLog().add(String.format("% is defending.",
+						char2.getCharacterName()));
+				battle.getLog().add(String.format("% is charging for an attack.",
+						char1.getCharacterName()));
+			}
+		}
+		
+		mo.save(battle, Constants.BATTLES_COLLECTION_NAME);
+	}
+	
+	static int calculateDmg(int level, int str, double critChance, int mitigation) {
+		return level + str;
 	}
 	
 }

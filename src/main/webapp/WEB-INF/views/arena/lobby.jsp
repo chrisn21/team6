@@ -62,7 +62,7 @@
 
 <script>
 var createBattle = function(id) {
-	$.post('/app/arena', {userId2: id}, function() {
+	$.post('<c:url value="/arena"/>', {userId2: id}, function() {
 		console.log('came back!');
 	});
 	console.log(id);

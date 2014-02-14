@@ -92,21 +92,12 @@ public class ArenaController {
 
 		String userId1 = battle.getUserId1();
 		String userId2 = battle.getUserId2();
-		Boolean isActiveTurn = false;
-		
-		// Determine if it's current user's turn
-		if (battle.isUser1Turn()) {
-			isActiveTurn = thisUserId.equals(userId1);
-		} else {
-			isActiveTurn = thisUserId.equals(userId2);
-		}
 		
 		mv.addObject("user1", accService.findById(userId1));
 		mv.addObject("user2", accService.findById(userId2));
 		mv.addObject("char1", battle.getChar1());
 		mv.addObject("char2", battle.getChar2());
 		mv.addObject("log", battle.getLog());
-		mv.addObject("isActiveTurn", isActiveTurn);
 		return mv;
 	}
 	
@@ -131,7 +122,7 @@ public class ArenaController {
 			return new ModelAndView(Constants.NOT_FOUND_PATH_FILE);
 		}
 		
-		arenaService.doBattleCommand(battleId, thisUserId, cmd);
+		arenaService.doBattleCommand(battle, thisUserId, cmd.toLowerCase());
 		return showBattle(req, battleId);
 	}
 }
