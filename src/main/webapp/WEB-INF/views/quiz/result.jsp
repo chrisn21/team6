@@ -8,8 +8,9 @@
 <body>
 <jsp:include page="../header.jsp"/>
 
-<div class="callout"></div>
+<div class="callout callout-top"></div>
 <p>Good work, ${userId}</p>
+<p>You've gained ${expGained} experience points!</p>
 
 </body>
 </html>

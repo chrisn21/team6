@@ -7,16 +7,15 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<div class="callout">
+<div class="callout callout-top">
 	<h1>Battle</h1>
 	<h5>
 		<c:out value="${char1.characterName}"/> vs <c:out value="${char2.characterName}"/>
 	</h5>
-</div>
-<div class="grid">
+	<div class="grid clearfix">
 
 <div id="portraits">
-	<div class="col_6">
+	<div class="col_6 visible">
 		<table class="tight sortable">
 			<tbody><tr>
 				<th></th>
@@ -41,7 +40,7 @@
 			</tr></tbody>
 		</table>
 	</div>
-	<div class="col_6">
+	<div class="col_6 visible">
 		<table class="tight sortable">
 			<tbody><tr>
 				<th></th>
@@ -68,6 +67,12 @@
 	</div>
 </div>
 
+<div class="col_12 visible" id="log" style="color: black;">
+<c:forEach var="msg" items="${log}">
+	<p>&gt; <c:out value="${msg}"/></p>
+</c:forEach>
+</div>
+
 <c:choose>
 <c:when test="${isActiveTurn}">
 
@@ -75,7 +80,7 @@
 <form method="POST">
 	<input id="cmd" name="cmd" type="text" value="" style="display:none;"/>
 	<button id="attack-button" class="large red"><i class="icon-bolt"></i> Attack</button>
-	<button id="charge-button" class="large blue"><i class="icon-star"></i> Charge</button>
+	<button id="charge-button" class="large orange"><i class="icon-star"></i> Charge</button>
 	<button id="defend-button" class="large green"><i class="icon-ban-circle"></i> Defend</button>
 </form>
 </div>
@@ -101,10 +106,6 @@ $('#defend-button').click(function() {
 </c:otherwise>
 </c:choose>
 
-<div class="col_12 tab-content" id="log">
-<c:forEach var="msg" items="${log}">
-	<p>&gt; <c:out value="${msg}"/></p>
-</c:forEach>
 </div>
 
 </div>

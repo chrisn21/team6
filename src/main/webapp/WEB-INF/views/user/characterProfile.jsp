@@ -10,7 +10,7 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<div class="callout">
+<div class="callout callout-top">
 <h1>Your Character</h1>
 <h5>It's all about <c:out value="${character.characterName}"/>!</h5>
 </div>

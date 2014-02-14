@@ -40,7 +40,7 @@ function isDate(txtDate)
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<div class="callout">
+<div class="callout callout-top">
 <h1>Sign-Up</h1>
 <h5>Let's get started!</h5>
 </div>

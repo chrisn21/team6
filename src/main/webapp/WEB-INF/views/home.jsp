@@ -8,7 +8,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 
-<div class="callout"></div>
+<div class="callout callout-top"></div>
 <div class="grid">
 <%if(request.getSession(true).getAttribute("loggedin") == null)
 {%>

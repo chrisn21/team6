@@ -4,8 +4,6 @@ import org.springframework.data.annotation.Id;
 
 public class Question {
 	
-	@Id
-	private String id;
 	private String category;
 	private String answer;
 	private int difficulty;
@@ -26,10 +24,6 @@ public class Question {
 
 	public int getDifficulty() {
 		return difficulty;
-	}
-
-	public String getId() {
-		return id;
 	}
 	
 	public String getQuestion() {

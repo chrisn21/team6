@@ -4,8 +4,6 @@ import org.springframework.data.annotation.Id;
 
 public class Character {
 
-	@Id //Fields of Character table/collection
-	private String id;
 	private String characterName;
 	private String character;
 	private int level;

@@ -7,9 +7,11 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
+<div class="callout callout-top">
+	<h1>Quizzes</h1>
+	<h5>Level up in real life</h5>
 
-<div class="callout"></div>
-<div class="grid">
+<div class="grid clearfix">
 <div class="tab-content">
 	<div class="col_12">
 		<c:forEach var="category" items="${categories}">
@@ -29,6 +31,7 @@
 			</article>
 		</c:forEach>
 	</div>
+</div>
 </div>
 </div>
 

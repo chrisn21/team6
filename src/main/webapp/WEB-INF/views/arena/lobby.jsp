@@ -7,13 +7,11 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<div class="callout">
-<h1>Arena</h1>
-<h5>Let's get ready to rumble...</h5>
-</div>
-<div class="grid">
+<div class="callout callout-top">
+<h1>The Arena</h1>
+<div class="grid clearfix">
 
-<div class="col_6">
+<div class="col_6 visible">
 <h2>Available to fight</h2>
 <table class="sortable">
 <thead><tr>
@@ -21,6 +19,7 @@
 	<th>Level</th>
 	<th>Type</th>
 	<th>Owner</th>
+	<th></th>
 </tr></thead>
 <tbody>
 <c:forEach var="opponent" items="${opponents}">
@@ -29,13 +28,14 @@
 	<td><c:out value="${opponent.character.level}"/></td>
 	<td><c:out value="${opponent.character.character}"/></td>
 	<td><c:out value="${opponent.username}"/></td>
+	<td><button class="small red" onClick='createBattle("<c:out value="${opponent.id}"/>")'><i class="icon-bolt"></i> Challenge</button></td>
 	</tr>
 </c:forEach>
 </tbody>
 </table>
 </div>
 
-<div class="col_6">
+<div class="col_6 visible">
 <h2>Your battles</h2>
 <table class="sortable">
 <thead><tr>
@@ -58,6 +58,15 @@
 </div>
 
 </div>
+</div>
 
+<script>
+var createBattle = function(id) {
+	$.post('/app/arena', {userId2: id}, function() {
+		console.log('came back!');
+	});
+	console.log(id);
+};
+</script>
 </body>
 </html>

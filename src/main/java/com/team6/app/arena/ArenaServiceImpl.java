@@ -129,11 +129,6 @@ public class ArenaServiceImpl implements ArenaService {
 				Battle.class,
 				Constants.BATTLES_COLLECTION_NAME);
 		
-		if (battle == null) {
-			// Try switching parameters
-			battle = getBattleByUserIds(userId2, userId1);
-		}
-		
 		return battle;
 	}
 

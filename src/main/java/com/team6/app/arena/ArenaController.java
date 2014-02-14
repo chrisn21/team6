@@ -31,7 +31,7 @@ public class ArenaController {
 		HttpSession sesh = req.getSession(false);
 		
 		if (sesh == null) {
-			mv = new ModelAndView("redirect:/login");
+			return new ModelAndView("redirect:/login");
 		}
 		
 		String userId = (String) sesh.getAttribute("userid");
@@ -58,6 +58,7 @@ public class ArenaController {
 		
 		String thisUserId = (String) sesh.getAttribute("userid");
 		Battle battle = arenaService.createBattle(thisUserId, userId2);
+		battle = (battle == null) ? arenaService.createBattle(userId2, thisUserId) : battle;
 		
 		if (battle == null) {
 			return new ModelAndView(Constants.NOT_FOUND_PATH_FILE);

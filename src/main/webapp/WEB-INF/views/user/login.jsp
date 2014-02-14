@@ -7,7 +7,7 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<div class="callout">
+<div class="callout callout-top">
 <h1>Login</h1>
 </div>
 

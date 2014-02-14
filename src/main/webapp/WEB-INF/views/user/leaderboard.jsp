@@ -10,7 +10,7 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
-<div class="callout">
+<div class="callout callout-top">
 <h1>Leaderboard</h1>
 <h5>Can you make it to the top?</h5>
 </div>
