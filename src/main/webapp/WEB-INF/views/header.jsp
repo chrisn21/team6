@@ -9,5 +9,6 @@
 		<li><a href="<c:url value="/quiz" />">Train</a></li>
 		<li><a href="<c:url value="/arena" />">Battle</a></li>
 		<li><a href="<c:url value="/leaderboard" />">Leaderboard</a></li>
+		<li><a href="<c:url value="/MyCharacter"/>">My Profile</a></li>
 	</ul>
 </nav>

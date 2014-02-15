@@ -1,59 +1,61 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page session="false" %>
 <html>
-<script>
-
-function validateForm()
-{
-	var a=document.forms["acctSignup"]["firstName"].value;var b=document.forms["acctSignup"]["lastName"].value;
-	var c=document.forms["acctSignup"]["username"].value;var d=document.forms["acctSignup"]["password"].value;
-	var e=document.forms["acctSignup"]["email"].value;var f=document.forms["acctSignup"]["dob"].value;
-	var g=document.forms["acctSignup"]["characterName"].value;var h=document.forms["acctSignup"]["character"].value;
-	if (a == "" || b == "" || c == "" || d == "" || e == "" || f == "" || g == "" || h == "")
-	{
-	  alert("Error: Cannot process sign-up request, all fields must be filled out.");
-	  return false;
-	}
-	
-    if(isDate(f))
-   		return true;
-    else
-    {
-    	alert("Error: Invalid Date Of Birth Provided");
-    	return false;
-    }	
-    
-}
-
-function isDate(txtDate)
-{
-    var reg = /^(0[1-9]|1[012])([\/-])(0[1-9]|[12][0-9]|3[01])\2(\d{4})$/;
-    return reg.test(txtDate);
-}
-</script>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Account Sign-up</title>
+	<title>Welcome to THE GAME</title>
 	<jsp:include page="../includes.jsp"/>
+	<title>SmartPokemon Wars</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" />
+<meta name="copyright" />
+<link rel="stylesheet" type="text/css" href="css/kickstart.css" media="all" />                  
+<link rel="stylesheet" type="text/css" href="style.css" media="all" />                          <!-- CUSTOM STYLES -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/kickstart.js"></script>                                  
 </head>
-<body>
+<body topmargin="0" leftmargin="200" rightmargin="200" bottommargin="0" bgcolor="#000000">
+<!-- ===================================== END HEADER ===================================== -->
+	
+
+
 <jsp:include page="../header.jsp"/>
+
+
+
 <div class="callout callout-top">
 <h1>Sign-Up</h1>
 <h5>Let's get started!</h5>
 </div>
 
-	<form name="acctSignup" action="processSignup" onsubmit="return validateForm()" method="POST">
-	First name: 		<input type="text" name="firstName"><br>
-	Last name: 			<input type="text" name="lastName"><br>
-	User name: 			<input type="text" name="username"><br>
-	Password: 			<input type="password" size="20" name="password"><br>
-	Email: 				<input type="text" name="email"><br>
-	DOB [MM/DD/YYYY]: 	<input type="text" name="dob"><br>
-	Character Name: 	<input type="text" name="characterName"><br>
-	<div><img src="<c:url value="/resources/img/charizard.gif"/>" alt="Smiley face" height="120" width="120"><input type="submit" name="character" value="Charizard"></div>
-	</form>
-</body>
-</html>
+		
+<div class="container">
+
+      <form class="form-signin">
+        <h3 class="form-signin-heading">Please enter your information.</h3>
+        <input type="text" name="firstName" class="input-block-level" placeholder="First Name">
+		<input type="text" name="lastName" class="input-block-level" placeholder="Last Name">
+		<input type="password" name="password" class="input-block-level" placeholder="Password">
+		<input type="email" name="email" class="input-block-level" placeholder="email">
+		<input type="text" name="dob" class="input-block-level" placeholder="DOB [MM/DD/YYYY]:">
+        <input type="text" name="characterName" class="input-block-level" placeholder="Character Name:">
+		<div><img src="pokemon/charizard.gif" alt="Smiley face" height="120" width="120"><input type="submit" name="character" value="Charizard"></div>
+		<br />
+        <button name="character" class="btn btn-large btn-primary" type="submit">Sign up</button>
+      </form>
+
+    </div> <!-- /container -->
+
+<div class="callout clearfix">
+</div>
+
+<!-- ===================================== START FOOTER ===================================== -->
+<div class="clear"></div>
+<div id="footer">
+&copy; Copyright 2014 All Rights Reserved. Welcome to the World of Fun PokeWars 
+<a href="elements.html">Pokemon Wars</a> 
+<a href="login.html">Login</a> 
+<a href="contact.html">Contact Us</a>
+</div>
+
+</body></html>

@@ -30,7 +30,7 @@ public class RequestAPIController {
 	private RequestAPIService service;
 	
 	
-	@RequestMapping(value = "/requestAPI", method = RequestMethod.POST)
+	@RequestMapping(value = "/requestAPI", method = RequestMethod.GET)
 	public ModelAndView requestQuestions(@RequestParam("category") String category, Model model, HttpServletRequest request) throws UnirestException, JSONException {
 		ModelAndView mv = new ModelAndView(Constants.QUIZ_PATH_FILE);
 		String apicategory = "https://privnio-trivia.p.mashape.com/exec?category=" + category + "&v=1&method=getQuestions";
