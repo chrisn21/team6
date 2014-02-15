@@ -24,12 +24,14 @@ $('#next').click(function(){
     		$.each($('#quiz-form').serializeArray(), function(i, field) {
     			params.answers.push(field.value);
     		});
-    		console.log(params);
     		$.ajax({
     			type: 'POST',
     			data: params,
-    			success: function() {
-    				console.log('yeah');
+    			success: function(data) {
+    				$('#quiz-form').hide();
+    				$('#quiz-form-placeholder').
+    					html(data).
+    					fadeIn('slow');
     			},
     			async: false
     		});

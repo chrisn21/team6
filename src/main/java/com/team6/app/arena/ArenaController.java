@@ -97,6 +97,7 @@ public class ArenaController {
 		mv.addObject("user2", accService.findById(userId2));
 		mv.addObject("char1", battle.getChar1());
 		mv.addObject("char2", battle.getChar2());
+		mv.addObject("isUser1", battle.getUserId1().equals(thisUserId));
 		mv.addObject("log", battle.getLog());
 		return mv;
 	}
@@ -123,6 +124,6 @@ public class ArenaController {
 		}
 		
 		arenaService.doBattleCommand(battle, thisUserId, cmd.toLowerCase());
-		return showBattle(req, battleId);
+		return new ModelAndView("redirect:/arena/" + battleId);
 	}
 }

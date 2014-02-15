@@ -202,13 +202,15 @@ public class ArenaServiceImpl implements ArenaService {
 //					char1.getDef());
 			
 			if (cmd1.equals("attack") && cmd2.equals("attack")) {
+				char1.setCharged(false);
+				char2.setCharged(false);
 				char1.incrementHealth(-rawDmgTo1);
 				char2.incrementHealth(-rawDmgTo2);
-				battle.getLog().add(String.format("%s attacked %s for %d of damage!",
+				battle.getLog().add(String.format("%s attacked %s for %d points of damage!",
 						char1.getCharacterName(),
 						char2.getCharacterName(),
 						rawDmgTo2));
-				battle.getLog().add(String.format("%s attacked %s for %d of damage!",
+				battle.getLog().add(String.format("%s attacked %s for %d points of damage!",
 						char2.getCharacterName(),
 						char1.getCharacterName(),
 						rawDmgTo1));
@@ -223,15 +225,18 @@ public class ArenaServiceImpl implements ArenaService {
 						char1.getCharacterName(),
 						char2.getCharacterName()));
 			} else if (cmd1.equals("attack") && cmd2.equals("defend")) {
+				char1.setCharged(false);
 				battle.getLog().add(String.format("%s attacked %s, who was defending! It wasn't very effective....",
 						char1.getCharacterName(),
 						char2.getCharacterName()));
 			} else if (cmd1.equals("attack") && cmd2.equals("charge")) {
+				char1.setCharged(false);
 				char2.incrementHealth(-rawDmgTo2);
 				battle.getLog().add(String.format("%s attacked %s, who was trying to charge an attack! It was very effective!",
 						char1.getCharacterName(),
 						char2.getCharacterName()));
 			} else if (cmd1.equals("defend") && cmd2.equals("attack")) {
+				char2.setCharged(false);
 				battle.getLog().add(String.format("%s attacked %s, who was defending! It wasn't very effective....",
 						char2.getCharacterName(),
 						char1.getCharacterName()));
@@ -242,6 +247,7 @@ public class ArenaServiceImpl implements ArenaService {
 				battle.getLog().add(String.format("% is charging for an attack.",
 						char2.getCharacterName()));
 			} else if (cmd1.equals("charge") && cmd2.equals("attack")) {
+				char2.setCharged(false);
 				char1.incrementHealth(-rawDmgTo2);
 				battle.getLog().add(String.format("%s attacked %s, who was trying to charge an attack! It was very effective!",
 						char2.getCharacterName(),

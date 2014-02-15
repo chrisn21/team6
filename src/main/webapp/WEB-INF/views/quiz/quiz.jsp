@@ -13,6 +13,7 @@
 	<h5>${quiz.description}</h5>
 
 <div class="grid clearfix">
+<div id="quiz-form-placeholder" style="display: none;"></div>
 <form id="quiz-form" method="POST">
 
 	<c:forEach var="question" items="${questions}">
@@ -29,24 +30,5 @@
 </div>
 </div>
 
-<script>
-$(function() {
-	$('#quiz-form').submit(function(e) {
-		var params = {answers:[]};
-		$.each($('#quiz-form').serializeArray(), function(i, field) {
-			params.answers.push(field.value);
-		});
-		e.preventDefault();
-		$.ajax({
-			type: 'POST',
-			data: params,
-			success: function() {
-				console.log('yeah');
-			},
-			async: false
-		});
-	});
-});
-</script>
 </body>
 </html>

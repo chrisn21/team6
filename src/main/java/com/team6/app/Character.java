@@ -13,7 +13,7 @@ public class Character {
 	private int str;
 	private int def;
 	private double crit_chance;
-	private boolean isCharged;
+	private boolean charged;
 	private static final int levelMax = 100;
 	public Character (String character, String characterName)
 	{
@@ -27,7 +27,7 @@ public class Character {
 		this.str = 1;
 		this.def = 1;
 		this.crit_chance = (5/100) + (this.level/(Character.levelMax*20));
-		this.isCharged = true;
+		this.charged = true;
 	}
 	
 	public String getCharacterName() {
@@ -112,10 +112,10 @@ public class Character {
     }
 
 	public boolean isCharged() {
-		return isCharged;
+		return charged;
 	}
 
 	public void setCharged(boolean isCharged) {
-		this.isCharged = isCharged;
+		this.charged = isCharged;
 	}
 }

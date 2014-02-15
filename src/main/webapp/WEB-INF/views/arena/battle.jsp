@@ -76,7 +76,14 @@
 <div class="col_12" id="commands">
 <form method="POST">
 	<input id="cmd" name="cmd" type="text" value="" style="display:none;"/>
-	<button id="attack-button" class="large red"><i class="icon-bolt"></i> Attack</button>
+	<c:choose>
+	<c:when test="${char1.charged}">
+		<button id="attack-button" class="large red"><i class="icon-bolt"></i> Attack</button>
+	</c:when>
+	<c:otherwise>
+		<button id="attack-button" class="large disabled"><i class="icon-bolt"></i> Attack</button>
+	</c:otherwise>
+	</c:choose>
 	<button id="charge-button" class="large orange"><i class="icon-star"></i> Charge</button>
 	<button id="defend-button" class="large green"><i class="icon-ban-circle"></i> Defend</button>
 </form>
