@@ -73,9 +73,6 @@
 </c:forEach>
 </div>
 
-<c:choose>
-<c:when test="${isActiveTurn}">
-
 <div class="col_12" id="commands">
 <form method="POST">
 	<input id="cmd" name="cmd" type="text" value="" style="display:none;"/>
@@ -85,26 +82,16 @@
 </form>
 </div>
 <script>
-$('#attack-button').click(function() {
-	console.log('attack');
-	$('#cmd-text').value('attack');
+$('#attack-button').click(function(e) {
+	$('#cmd').val('attack');
 });
 $('#charge-button').click(function() {
-	$('#cmd-text').value('charge');
+	$('#cmd').val('charge');
 });
 $('#defend-button').click(function() {
-	$('#cmd-text').value('defend');
+	$('#cmd').val('defend');
 });
 </script>
-
-</c:when>
-<c:otherwise>
-
-<div>
-</div>
-
-</c:otherwise>
-</c:choose>
 
 </div>
 

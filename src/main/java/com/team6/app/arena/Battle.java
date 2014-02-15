@@ -12,10 +12,11 @@ public class Battle {
 	private String id;
 	private String userId1;
 	private String userId2;
+	private String userCmd1;
+	private String userCmd2;
 	private Character char1;
 	private Character char2;
 	private Collection<String> log;
-	private boolean user1Turn;
 	
 	public String getId() {
 		return id;
@@ -35,8 +36,11 @@ public class Battle {
 	public Collection<String> getLog() {
 		return log;
 	}
-	public boolean isUser1Turn() {
-		return user1Turn;
+	public String getUserCmd1() {
+		return userCmd1;
+	}
+	public String getUserCmd2() {
+		return userCmd2;
 	}
 	public void setUserId1(String userId1) {
 		this.userId1 = userId1;
@@ -53,8 +57,11 @@ public class Battle {
 	public void setLog(Collection<String> log) {
 		this.log = log;
 	}
-	public void setUser1Turn(boolean user1Turn) {
-		this.user1Turn = user1Turn;
+	public void setUserCmd1(String userCmd1) {
+		this.userCmd1 = userCmd1;
+	}
+	public void setUserCmd2(String userCmd2) {
+		this.userCmd2 = userCmd2;
 	}
 	
 }

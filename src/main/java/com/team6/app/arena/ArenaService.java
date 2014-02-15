@@ -12,6 +12,6 @@ public interface ArenaService {
 	public Battle getBattleById(String battleId);
 	public Battle getBattleByUserIds(String userId1, String userId2);
 	public Collection<Battle> getBattlesByUserId(String userId);
-	public void doBattleCommand(String battleId, String userId, String cmd);
+	public void doBattleCommand(Battle battle, String userId, String cmd);
 	
 }

@@ -13,6 +13,7 @@ public class Character {
 	private int str;
 	private int def;
 	private double crit_chance;
+	private boolean isCharged;
 	private static final int levelMax = 100;
 	public Character (String character, String characterName)
 	{
@@ -26,6 +27,7 @@ public class Character {
 		this.str = 1;
 		this.def = 1;
 		this.crit_chance = (5/100) + (this.level/(Character.levelMax*20));
+		this.isCharged = true;
 	}
 	
 	public String getCharacterName() {
@@ -92,4 +94,28 @@ public class Character {
     {
     	this.characterName = name;
     }
+    
+    public void incrementHealth(int amt) {
+    	this.health += amt;
+    }
+    
+    public void incrementStr(int amt) {
+    	this.str += amt;
+    }
+    
+    public void incrementDef(int amt) {
+    	this.def += amt;
+    }
+    
+    public void incrementCrit_Chance(int amt) {
+    	this.crit_chance += amt;
+    }
+
+	public boolean isCharged() {
+		return isCharged;
+	}
+
+	public void setCharged(boolean isCharged) {
+		this.isCharged = isCharged;
+	}
 }
