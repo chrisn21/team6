@@ -30,8 +30,8 @@
 		<div>
 		<!-- Slideshow -->
 <ul class="slideshow">
-<li><img src="<c:url value="/resources/Media/pokemon_frontpage.png"/>" width="550" height="350" /></li>
-<li><img src="<c:url value="/resources/Media/welcome_banner.jpg"/>" width="550" height="350" /></li>
+<li><img src="<c:url value="/resources/css/Media/pokemon_frontpage.png"/>" width="550" height="350" /></li>
+<li><img src="<c:url value="/resources/css/Media/welcome_banner.jpg"/>" width="550" height="350" /></li>
 
 </ul>
 		</div>

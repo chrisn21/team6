@@ -38,7 +38,7 @@
 				<div class="myprofile">	
 				
 					<div class="charimg">
-						<img src="pokemon/charizard.gif" alt="Smiley face" height="120" width="120"><input type="submit" name="character" value="Charizard">
+						<img src="<c:url value="/resources/img/charizard.gif"/>" alt="Smiley face" height="120" width="120"><input type="submit" name="character" value="Charizard">
 					</div>
 					<div class="charstats">
 					<table><tr><td><h4>Character Stats:</h4></td></tr>
